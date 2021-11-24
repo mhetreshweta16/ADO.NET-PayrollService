@@ -60,13 +60,17 @@ namespace ADOProject
             }
         }
 
+        /// <summary>
+        /// Adds the employee.
+        /// </summary>
+        /// <param name="model">The model.</param>
         public void AddEmployee(EmployeeModel model)
         {
             try
             {
                 using (this.sqlConnection)
                 {
-                    SqlCommand command = new SqlCommand("dbo.SPAddEmployeeDetails", this.sqlConnection);
+                    SqlCommand command = new SqlCommand("dbo.SpAddEmployeeDetails", this.sqlConnection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@name", model.employeeName);
                     command.Parameters.AddWithValue("@salary", model.employeeSalary);
@@ -95,5 +99,41 @@ namespace ADOProject
                 sqlConnection.Close();
             }
         }
+
+        public void UpdateEmployeeDetails(EmployeeModel model)
+        {
+            try
+            {
+                using (this.sqlConnection)
+                {
+                    SqlCommand command = new SqlCommand("dbo.SpUpdateDetails", this.sqlConnection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@name", model.employeeName);
+                    command.Parameters.AddWithValue("@salary", model.employeeSalary);
+                    
+                   sqlConnection.Open();
+                    var res = command.ExecuteNonQuery();
+                    if (res != 0)
+                    {
+                        Console.WriteLine("successfully Updated");
+                    }
+                    else
+                        Console.WriteLine("unsuccessfull");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+
+        }
+
     }
 }
