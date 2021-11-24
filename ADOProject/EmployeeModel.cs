@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ADOProject
 {
-    class EmployeeModel
+   public   class EmployeeModel
     {
         public int employeeId { get; set; }
         public string employeeName { get; set; }
-        public float employeeSalary { get; set; }
+        public double employeeSalary { get; set; }
         public DateTime startDate { get; set; }
         public string gender { get; set; }
         public long phoneNumber { get; set; }
